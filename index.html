@@ -206,54 +206,81 @@
       overflow: hidden;
       margin: 20px 0 10px;
       border: 1px solid var(--line);
+      background: #fff;
     }
 
+
+    /* Background: fill full width, keep aspect ratio, crop from the top if needed, align bottom */
     .banner-bg {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center bottom;
+      z-index: 0;
     }
 
+
+    /* Triangles: aligned to the right with controlled overlap */
     .banner-tri {
       position: absolute;
-      top: 0;
+      right: 0;
       height: 100%;
+      width: auto;
       object-fit: contain;
       pointer-events: none;
+      z-index: 2;
     }
 
+    /* Left triangle: top touches banner top */
     .banner-tri.left {
-      left: 0
+      top: 0;
+      bottom: auto;
+      right: 26%;
+      z-index: 3;
     }
 
+    /* Right triangle: bottom touches banner bottom */
     .banner-tri.right {
-      right: 0
+      top: auto;
+      bottom: 0;
+      right: 0;
+      z-index: 2;
     }
 
-    .banner-content {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      padding: 24px;
-    }
 
+    /* Logos: fixed top-left stack */
     .banner-logos {
+      position: absolute;
+      top: 10px;
+      left: 12px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       align-items: flex-start;
+      z-index: 4;
     }
 
     .banner-logo {
-      height: 48px
+      display: block;
+      height: 46px;
+      width: auto
     }
 
+    .banner-logo.wrk {
+      height: 44px
+    }
+
+
+    /* Text: placed on left, below logos; adjust as needed */
     .banner-text {
-      color: #111
+      position: absolute;
+      left: 140px;
+      bottom: 18px;
+      z-index: 4;
+      color: #111;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
     }
 
     .banner-title {
@@ -267,24 +294,22 @@
       margin-top: 4px
     }
 
-    .banner-meta {
-      font-size: 14px;
-      color: #444;
-      margin-top: 6px
+    @media (max-width: 860px){
+    .banner{aspect-ratio: 3.2 / 1}
+    .banner-title{font-size: 34px}
+    .banner-subtitle{font-size: 15px}
+    .banner-text{left: 120px; bottom: 14px}
+    .banner-tri.left{right: 22%}
     }
 
-    @media (max-width:700px) {
-      .banner {
-        aspect-ratio: 3 / 1
-      }
 
-      .banner-title {
-        font-size: 30px
-      }
-
-      .banner-subtitle {
-        font-size: 15px
-      }
+    @media (max-width: 640px){
+    .banner{aspect-ratio: 2.6 / 1}
+    .banner-title{font-size: 26px}
+    .banner-subtitle{font-size: 13px}
+    .banner-logo{height: 38px}
+    .banner-logo.wrk{height: 36px}
+    .banner-text{left: 12px; bottom: 10px}
     }
   </style>
 </head>
@@ -295,16 +320,14 @@
       <img src="images/banner/background.jpg" alt="" class="banner-bg">
       <img src="images/banner/triangle_left.png" alt="" class="banner-tri left">
       <img src="images/banner/triangle_right.png" alt="" class="banner-tri right">
-      <div class="banner-content">
-        <div class="banner-logos">
-          <img src="images/banner/cvpr_logo.png" alt="CVPR 2026 logo" class="banner-logo">
-          <img src="images/banner/genrecon3d_logo.png" alt="GenRecon3D logo" class="banner-logo">
-        </div>
-        <div class="banner-text">
-          <div class="banner-title">GenRecon3D</div>
-          <div class="banner-subtitle">1st Workshop on Generative 3D Reconstruction</div>
-          <div class="banner-meta">CVPR Workshops 2026 · Denver, Colorado</div>
-        </div>
+      <div class="banner-content" aria-hidden="true"></div>
+      <div class="banner-logos" aria-label="Logos">
+        <img src="images/banner/cvpr_logo.png" alt="CVPR 2026 logo" class="banner-logo cvpr">
+        <img src="images/banner/genrecon3d_logo.png" alt="GenRecon3D logo" class="banner-logo wrk">
+      </div>
+      <div class="banner-text">
+        <div class="banner-title">GenRecon3D</div>
+        <div class="banner-subtitle">1st Workshop on Generative 3D Reconstruction</div>
       </div>
     </div>
   </header>

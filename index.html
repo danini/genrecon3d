@@ -95,7 +95,7 @@
       .speaker{grid-template-columns: 72px 1fr}
       .avatar{width: 72px; height: 72px}
       .navline a{display:inline-block; margin-bottom: 6px}
-      .banner{aspect-ratio: 3 / 1}
+      .banner{aspect-ratio: 2 / 1; min-height: 180px}
     }
   
     .pageBanner{width:100%; margin: 0; padding: 0; min-width: 960px;}
@@ -167,23 +167,39 @@
       z-index: 4;
     }
 
-    @media (max-width: 960px){
+    @media (max-width: 860px){
       .pageBanner{ min-width: 0; }
       .banner{
         min-width: 0;
         width: 100%;
       }
-      
+
       .banner-logo.cvpr{
         display: none;
       }
-      
+
+      .banner-triangles{
+        right: -30%;
+      }
+
       .navline{margin: 0px 0 0px; font-size: 0px;}
       .navline a{margin-right: 6px}
       .btn{
         padding: 8px 8px;
         font-size: 13px;
         line-height: 1.2;
+      }
+    }
+
+    @media (max-width: 460px){
+      .banner-triangles{
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .banner-logo.wrk{
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
     }
 
@@ -232,7 +248,7 @@
     <h2 id="speakers">Keynote speakers</h2>
 
     <div class="speaker">
-      <img class="avatar" src="https://stanford.edu/~gordonwz/images/gordon_wetzstein_small.jpg" alt="Gordon Wetzstein">
+      <img class="avatar" src="images/gordon_wetzstein_small.jpg" alt="Gordon Wetzstein">
       <div>
         <div class="speakerTitle">Gordon Wetzstein</div>
         <div class="speakerMeta">Associate Professor, Stanford · <a
